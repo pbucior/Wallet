@@ -126,3 +126,4 @@ STATICFILES_DIRS = ( 'static', )
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'wallet-home'
+LOGOUT_REDIRECT_URL = 'wallet-home'
