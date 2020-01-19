@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block body %}
-{% if user.is_authenticated %}
 <h2>Operacje</h2>
 {% for operation in operations %}
 <article class="media content-section">
@@ -9,6 +8,5 @@
     </div>
 </article>
 {% endfor %}
-{% endif %}
 
 {% endblock body %}
