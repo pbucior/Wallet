@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Usuń operację</legend>
+            <h2>Czy na pewno usunąć operację: {{ object.description }} {{ object.amount }}?</h2>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-danger" type="submit">Tak, Usuń</button>
+            <a class="btn btn-outline-secondary" href="{% url 'wallet-home' %}">Anuluj</a>
+        </div>
+    </form>
+</div>
+{% endblock body %}

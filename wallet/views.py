@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Sum
@@ -57,3 +57,13 @@ class NewOperationView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class OperationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Operation
+    success_url = '/'
+
+    def test_func(self):
+        operation = self.get_object()
+        if self.request.user == operation.user:
+            return True
+        return False

@@ -8,6 +8,10 @@
 <div class="card mt-3">
     <div class="card-header text-white {% if operation.posting_key == 0 %}bg-danger{% else %}bg-success{% endif %}">
         {{ operation.date_operation }}
+        <div class="btn-group float-right" role="group" aria-label="Basic example">
+            <a type="button" class="btn btn-warning text-dark">Edytuj</a>
+            <a type="button" class="btn btn-primary text-light" href="{% url 'operation-delete' operation.id %}">Usuń</a>
+        </div>
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ operation.description }}</h5>
