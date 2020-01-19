@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.db.models import Sum
 from .models import Operation
 from .forms import UserRegisterForm
 
@@ -17,6 +18,21 @@ class UserOperationsListView(LoginRequiredMixin, ListView):
     model = Operation
     template_name = 'home.html'
     context_object_name = 'operations'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.request.user)
+        operations = Operation.objects.filter(user=user)
+        debit = 0
+        credit = 0
+        for operation in operations:
+            if operation.posting_key == 0:
+                debit += operation.amount
+            else:
+                credit += operation.amount
+        balance = credit - debit
+        context['balance'] = balance
+        return context
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.request.user)

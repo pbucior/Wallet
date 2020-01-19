@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<div class="jumbotron">
-    <h1 class="display-4">Operacje</h1>
+<div class="jumbotron text-white {% if balance > 0.0 %}bg-success{% else %}bg-danger{% endif %}">
+    <h1 class="display-4">Saldo {{ balance }}</h1>
 </div>
 {% for operation in operations %}
 <div class="card mt-3">
-    <div class="card-header">
+    <div class="card-header text-white {% if operation.posting_key == 0 %}bg-danger{% else %}bg-success{% endif %}">
         {{ operation.date_operation }}
     </div>
     <div class="card-body">
