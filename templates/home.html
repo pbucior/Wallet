@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2>Operacje</h2>
+
+<div class="jumbotron">
+    <h1 class="display-4">Operacje</h1>
+</div>
 {% for operation in operations %}
-<article class="media content-section">
-    <div class="media-body">
-        <h2 class="article-title">{{ operation.description }}</h2>
+<div class="card mt-3">
+    <div class="card-header">
+        {{ operation.date_operation }}
     </div>
-</article>
+    <div class="card-body">
+        <h5 class="card-title">{{ operation.description }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ operation.amount }}</h6>
+    </div>
+</div>
 {% endfor %}
 
 {% endblock body %}
