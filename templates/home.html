@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2>Home</h2>
+{% if user.is_authenticated %}
+<h2>Operacje</h2>
+{% for operation in operations %}
+<article class="media content-section">
+    <div class="media-body">
+        <h2 class="article-title">{{ operation.description }}</h2>
+    </div>
+</article>
+{% endfor %}
+{% endif %}
 
 {% endblock body %}

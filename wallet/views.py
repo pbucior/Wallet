@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from .models import Operation
 
 def home(request):
-    return render(request, 'home.html')
+    context = {
+        'operations': Operation.objects.all()
+    }
+    return render(request, 'home.html', context)
